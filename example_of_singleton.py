@@ -1,6 +1,6 @@
-""""# Singleton pattern
+# Singleton pattern. The basic pattern.
 # making a Singleton with the nested class
-class OnlyOne:
+"""class OnlyOne:
     class __OnlyOne:
         def __init__(self,arg):
             self.val = arg
@@ -51,9 +51,29 @@ print(x)"""
 # decorator case, as it takes a class of interest (thus any)
 # and adds functionality to it by wrapping it in another class
 
-class SingletonDecorator:
+"""class SingletonDecorator:
     def __init__(self, _class):
         self._class = _class
         self.instance = None
     def __call__(self, *args, **kwds):
-        if self.instance == self._class(*args, **kwds):
+        if self.instance == None:
+            self.instance = self._class(*args,**kwds)
+        return self.instance
+    def __str__(self):
+        return repr(self) + self.val
+class _Test:
+    pass
+
+_test = SingletonDecorator(_Test)
+
+x = _test()
+y = _test()
+z = _test()
+x.val = 'Jaime'
+y.val = 'Brienna'
+z.val = 'Bronn'
+
+print(x)
+print(y)
+print(z) """
+            
