@@ -1,5 +1,6 @@
 import sys
 import math
+import heapq
 
 def check_if_sorted(main_arr, sorted_arr):
     main_arr  = sorted(main_arr)
@@ -90,18 +91,16 @@ class MaxHeap():
 def max_heapify(heap, i):
     left = 2*i + 1
     right = 2*i + 2
-    largest = i
-    if left < heap.heap_size:
-        if heap.arr[left] > heap.arr[i]:
+
+    if left < heap.heap_size and heap.heap_arr[left] > heap.heap_arr[i]:
             largest = left
     else:
         largest = i
-    if right < heap.heap_len:
-        if heap.heap_arr[right] > heap.heap_arr[largest]:
+    if right < heap.heap_size and heap.heap_arr[right] > heap.heap_arr[largest]:
             largest = right
     if largest != i:
         heap.heap_arr[i], heap.heap_arr[largest] = heap.heap_arr[largest], heap.heap_arr[i]
-        max_heapify(heap.heap_arr, largest)
+        max_heapify(heap, largest)
 
 def build_max_heap(heap):
     for i in reversed(range(heap.heap_len//2)):
@@ -110,20 +109,26 @@ def build_max_heap(heap):
 def heap_sort(arr):
     heap = MaxHeap(arr)
     build_max_heap(heap)
-    for i in reversed(range(1, heap.heap_len-1)):
-        heap.heap_arr[0], heap.heap_arr[i] = arr[i], arr[0]
-        max_heapify(arr, 0)
+    print(heap.heap_arr)
+    for i in reversed(range(1, heap.heap_len)):
+        heap.heap_arr[0], heap.heap_arr[i] = heap.heap_arr[i], heap.heap_arr[0]
+        heap.heap_size -= 1
+        max_heapify(heap, 0)
+
 
 if __name__ == '__main__':
     ## len is 10
-    # unsorted_arr  = [2, 1, 3, 4, 1, 7, 4 , 6, 5, 8]
-    unsorted_arr  = [5,4,5,3,2,1]
-    print(unsorted_arr)
-    sorted_arr = merge_sort_index(unsorted_arr, 0, len(unsorted_arr)-1)
-
-    print(unsorted_arr)
-    print(sorted_arr)
-
-    check_if_sorted(unsorted_arr, sorted_arr)
-    # heap_sort(unsorted_arr)
+    unsorted_arr  = [2, 1, 3, 4, 1, 7, 4 , 6, 5, 8]
+    unsorted_arr_for_heapq = [2, 1, 3, 4, 1, 7, 4, 6, 5, 8]
+    heapq._heapify_max(unsorted_arr_for_heapq)
+    print(unsorted_arr_for_heapq)
+    # unsorted_arr  = [5,4,5,3,2,1]
     # print(unsorted_arr)
+    # sorted_arr = merge_sort_index(unsorted_arr, 0, len(unsorted_arr)-1)
+    #
+    # print(unsorted_arr)
+    # print(sorted_arr)
+    #
+    # check_if_sorted(unsorted_arr, sorted_arr)
+    heap_sort(unsorted_arr)
+    print(unsorted_arr)
