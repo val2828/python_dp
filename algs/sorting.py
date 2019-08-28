@@ -109,7 +109,7 @@ def build_max_heap(heap):
 def heap_sort(arr):
     heap = MaxHeap(arr)
     build_max_heap(heap)
-    print(heap.heap_arr)
+    # print(heap.heap_arr)
     for i in reversed(range(1, heap.heap_len)):
         heap.heap_arr[0], heap.heap_arr[i] = heap.heap_arr[i], heap.heap_arr[0]
         heap.heap_size -= 1
@@ -122,13 +122,10 @@ if __name__ == '__main__':
     unsorted_arr_for_heapq = [2, 1, 3, 4, 1, 7, 4, 6, 5, 8]
     heapq._heapify_max(unsorted_arr_for_heapq)
     print(unsorted_arr_for_heapq)
-    # unsorted_arr  = [5,4,5,3,2,1]
-    # print(unsorted_arr)
     # sorted_arr = merge_sort_index(unsorted_arr, 0, len(unsorted_arr)-1)
-    #
-    # print(unsorted_arr)
-    # print(sorted_arr)
-    #
-    # check_if_sorted(unsorted_arr, sorted_arr)
     heap_sort(unsorted_arr)
+    # # print(unsorted_arr)
+    # # print(sorted_arr)
+    # #
+    # # check_if_sorted(unsorted_arr, sorted_arr)
     print(unsorted_arr)
